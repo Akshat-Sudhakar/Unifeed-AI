@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+/* ============================================================
+   UniFeed AI — Bitcoin DeFi Design System
+   True Void × Bitcoin Orange × Digital Gold
+   ============================================================ */
+
+@theme {
+  /* ── Core Palette ──────────────────────────────────────── */
+  --color-void:         #030304;
+  --color-surface:      #0F1115;
+  --color-surface-2:    #161B22;
+  --color-border:       #1E293B;
+
+  /* Bitcoin Fire */
+  --color-btc-orange:   #F7931A;
+  --color-btc-burnt:    #EA580C;
+  --color-btc-gold:     #FFD600;
+
+  /* Text */
+  --color-stardust:     #94A3B8;
+
+  /* Platform */
+  --color-linkedin:     #0A66C2;
+  --color-instagram:    #E1306C;
+  --color-reels:        #833AB4;
+
+  /* ── Fonts ─────────────────────────────────────────────── */
+  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Animations ────────────────────────────────────────── */
+  --animate-fade-in:    fade-in 0.5s ease-out;
+  --animate-slide-up:   slide-up 0.4s ease-out;
+  --animate-slide-down: slide-down 0.3s ease-out;
+  --animate-float:      float 8s ease-in-out infinite;
+  --animate-shimmer:    shimmer 2s linear infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-bounce-in:  bounce-in 0.6s ease-out;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px -5px rgba(234, 88, 12, 0.4); }
+  50%       { box-shadow: 0 0 40px -5px rgba(247,147, 26, 0.7); }
+}
+
+@keyframes bounce-in {
+  0%   { transform: scale(0.9); opacity: 0; }
+  60%  { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ping-orange {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #030304;
+  color: #ffffff;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(247, 147, 26, 0.2);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(247, 147, 26, 0.4);
+}
+
+.panel-scroll::-webkit-scrollbar { width: 4px; }
+.panel-scroll::-webkit-scrollbar-track { background: #1E293B; border-radius: 999px; }
+.panel-scroll::-webkit-scrollbar-thumb { background: #F7931A; border-radius: 999px; }
+.panel-scroll::-webkit-scrollbar-thumb:hover { background: #EA580C; }
+
+/* ── Focus ──────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #F7931A;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Selection ──────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(247, 147, 26, 0.25);
+  color: white;
+}
+
+/* ── Skip Link ──────────────────────────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #F7931A;
+  color: #030304;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+  border-radius: 0 0 8px 0;
+  font-weight: 700;
+}
+.skip-link:focus { top: 0; }
+
+/* ── Background Grid Pattern ────────────────────────────────── */
+
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right,  rgba(30, 41, 59, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
+}
+
+/* ── Glass Card ─────────────────────────────────────────────── */
+
+.glass-card {
+  background: rgba(15, 17, 21, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(247, 147, 26, 0.2);
+  box-shadow: 0 0 40px -10px rgba(247, 147, 26, 0.15);
+}
+
+/* ── Gradient Text ──────────────────────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(to right, #F7931A, #FFD600);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Bitcoin Button ─────────────────────────────────────────── */
+
+.btn-btc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #EA580C, #F7931A);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px -5px rgba(234, 88, 12, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-btc:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px -5px rgba(247, 147, 26, 0.6);
+}
+
+.btn-btc:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Platform Badges ────────────────────────────────────────── */
+
+.platform-badge-linkedin  { background: rgba(10,102,194,0.15); color: #60a5fa; border: 1px solid rgba(10,102,194,0.3); }
+.platform-badge-instagram { background: rgba(225,48,108,0.15);  color: #f472b6; border: 1px solid rgba(225,48,108,0.3); }
+.platform-badge-reels     { background: rgba(131,58,180,0.15);  color: #c084fc; border: 1px solid rgba(131,58,180,0.3); }
+
+/* ── Hashtag Pills ──────────────────────────────────────────── */
+
+.hashtag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  background: rgba(247, 147, 26, 0.08);
+  color: #F7931A;
+  border: 1px solid rgba(247, 147, 26, 0.2);
+  transition: all 0.2s ease;
+}
+
+.hashtag-pill:hover {
+  background: rgba(247, 147, 26, 0.15);
+  border-color: rgba(247, 147, 26, 0.4);
+}
+
+/* ── Shimmer ────────────────────────────────────────────────── */
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(247,147,26,0.03) 25%,
+    rgba(247,147,26,0.09) 50%,
+    rgba(247,147,26,0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* ── Glow Border ────────────────────────────────────────────── */
+
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #EA580C, #F7931A, #FFD600);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.glow-border:hover::before { opacity: 1; }
+
+/* ── Ambient Glow Background ────────────────────────────────── */
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  pointer-events: none;
+}
