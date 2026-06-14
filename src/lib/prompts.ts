@@ -119,7 +119,7 @@ CRITICAL RULES
 ═══════════════════════════════════════════════
 1. EVERY piece of content MUST be specifically about UniforMeFy and uniform/workwear — NO generic marketing advice
 2. Reference specific pain points of the target audience (${request.segment === 'corporate' ? 'HR managers managing 200+ employee wardrobes' : 'school administrators handling annual uniform procurement'})
-3. Include the CORE TOPIC "${request.topic}" as the central theme
+3. Ground the content in the user's specific situation: "${request.topic}"
 4. For EACH platform, generate exactly 3 different HOOK VARIATIONS (labeled Hook A, Hook B, Hook C) — each hook should take a completely different angle
 5. Include a VISUAL BRIEF for each content piece describing the ideal accompanying image/visual
 6. Use Delhi/NCR local context where relevant (seasons, festivals, business culture)

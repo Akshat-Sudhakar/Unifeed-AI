@@ -1,17 +1,26 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { Playfair_Display, Lora, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const spaceGrotesk = Space_Grotesk({
+const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-heading',
+  weight: ['400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+});
+
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-body',
   weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   display: 'swap',
 });
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-body',
+  variable: '--font-sans',
   display: 'swap',
 });
 
@@ -48,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-screen bg-[#030304] text-white antialiased" style={{ fontFamily: 'var(--font-body)' }}>
+    <html lang="en" className={`${playfairDisplay.variable} ${lora.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen bg-[#F9F9F7] text-[#111111] antialiased dot-grid-pattern selection:bg-[#111111] selection:text-[#F9F9F7]" style={{ fontFamily: 'var(--font-body)' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
         {children}
       </body>

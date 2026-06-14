@@ -9,13 +9,10 @@ interface InputPanelProps {
   isLoading: boolean;
 }
 
-// ── Small reusable section label with left orange bar ──────────────
+// ── Small reusable section label with bottom border ──────────────
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className="mb-3 flex items-center pl-3 text-[11px] font-mono uppercase tracking-widest text-[#94A3B8]"
-      style={{ borderLeft: '3px solid #F7931A' }}
-    >
+    <div className="mb-4 flex justify-between items-end border-b-2 border-[#111111] pb-1 text-left text-xs font-mono font-bold uppercase tracking-widest text-[#111111]">
       {children}
     </div>
   );
@@ -25,10 +22,9 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function CheckBadge() {
   return (
     <div
-      className="absolute -right-1.5 -top-1.5 z-10 flex h-4 w-4 items-center justify-center rounded-full"
-      style={{ background: '#F7931A' }}
+      className="absolute -right-2 -top-2 z-10 flex h-6 w-6 items-center justify-center bg-[#CC0000] sharp-corners border border-[#111111]"
     >
-      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="square" strokeLinejoin="miter" aria-hidden="true">
         <polyline points="20 6 9 17 4 12" />
       </svg>
     </div>
@@ -64,13 +60,13 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
     <div className="flex flex-col h-full">
 
       {/* ── Scrollable content area ──────────────────────────── */}
-      <div className="panel-scroll flex-1 overflow-y-auto pr-1" style={{ paddingRight: '4px' }}>
-        <div className="flex flex-col gap-6 pb-2">
+      <div className="panel-scroll flex-1 overflow-y-auto px-6 pt-6" style={{ paddingRight: '24px' }}>
+        <div className="flex flex-col gap-6 pb-8">
 
           {/* Header */}
-          <div>
-            <h2 className="font-heading text-lg font-semibold text-white">Content Blueprint</h2>
-            <p className="mt-1 font-mono text-[11px] text-[#94A3B8]/70">Configure your content parameters</p>
+          <div className="border-b-4 border-[#111111] pb-4 mb-2 text-center">
+            <h2 className="font-heading text-4xl font-black text-[#111111] uppercase tracking-tighter">Content Blueprint</h2>
+            <p className="mt-1 font-mono text-xs uppercase tracking-widest text-[#525252]">Configure your parameters.</p>
           </div>
 
           {/* ── Target Segment ─────────────────────────────── */}
@@ -86,67 +82,40 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
                     role="radio"
                     aria-checked={selected}
                     onClick={() => setSegment(seg.id)}
-                    className="relative flex flex-col items-start gap-1.5 rounded-xl p-3.5 text-left transition-all duration-200"
+                    className="relative flex flex-col items-center justify-center text-center gap-1.5 p-3.5 transition-all duration-200 sharp-corners border border-[#111111] min-h-[5rem]"
                     style={{
-                      border: selected ? '2px solid #F7931A' : '1px solid #334155',
-                      background: selected ? 'rgba(247,147,26,0.1)' : 'transparent',
+                      background: selected ? '#111111' : 'transparent',
+                      boxShadow: selected ? '4px 4px 0px 0px #CC0000' : 'none',
+                      transform: selected ? 'translate(-2px, -2px)' : 'none',
                     }}
                   >
                     {selected && <CheckBadge />}
                     <span className="text-xl">{seg.icon}</span>
-                    <span className="text-sm font-semibold text-white">{seg.label}</span>
-                    <span className="text-[11px] leading-snug text-[#94A3B8]">{seg.description}</span>
+                    <span className={`text-sm font-bold ${selected ? 'text-white' : 'text-[#111111]'}`}>{seg.label}</span>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* ── Core Topic ──────────────────────────────────── */}
+          {/* ── Context / Situation ──────────────────────────────────── */}
           <div className="relative">
             <SectionLabel>
-              <label htmlFor="topic-input">Core Topic</label>
+              <label htmlFor="topic-input">Describe Your Situation</label>
             </SectionLabel>
-            <input
+            <textarea
               id="topic-input"
-              type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-              placeholder="e.g., Summer Uniform Switch"
-              autoComplete="off"
-              className="w-full rounded-none border-b-2 bg-transparent px-0 py-2.5 text-sm text-white placeholder-white/25 outline-none transition-colors duration-200 font-body"
+              placeholder="e.g., We are a school in Delhi looking to switch to summer uniforms for 500 students next month…"
+              rows={4}
+              className="w-full text-left sharp-corners border-2 bg-white px-3 py-3 text-base font-serif text-[#111111] placeholder-[#737373] outline-none transition-colors duration-200 resize-none"
               style={{
-                borderBottom: topic.length >= 3
-                  ? '2px solid #F7931A'
-                  : showSuggestions
-                    ? '2px solid rgba(247,147,26,0.5)'
-                    : '2px solid rgba(255,255,255,0.15)',
+                borderColor: topic.length >= 3 ? '#111111' : '#A3A3A3',
               }}
               aria-describedby="topic-hint"
             />
-            <span id="topic-hint" className="sr-only">Enter a topic, minimum 3 characters</span>
-
-            {/* Suggestions dropdown */}
-            {showSuggestions && (
-              <div
-                className="absolute left-0 right-0 top-full z-20 mt-1 max-h-44 overflow-y-auto rounded-xl border border-white/10 animate-slide-down"
-                style={{ background: '#0F1115', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.8)' }}
-              >
-                {SUGGESTED_TOPICS.filter((t) => t.toLowerCase().includes(topic.toLowerCase())).map((s) => (
-                  <button
-                    key={s}
-                    type="button"
-                    onMouseDown={() => { setTopic(s); setShowSuggestions(false); }}
-                    className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm text-[#94A3B8] transition-colors hover:bg-[#F7931A]/5 hover:text-white"
-                  >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 opacity-50"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                    {s}
-                  </button>
-                ))}
-              </div>
-            )}
+            <span id="topic-hint" className="sr-only">Enter your context, minimum 3 characters</span>
           </div>
 
           {/* ── Content Platforms ───────────────────────────── */}
@@ -163,15 +132,16 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
                     aria-checked={selected}
                     aria-label={p.label}
                     onClick={() => togglePlatform(p.id)}
-                    className="relative flex flex-col items-center gap-1.5 rounded-xl py-3.5 text-center transition-all duration-200"
+                    className="relative flex flex-col items-center gap-1.5 py-3.5 text-center transition-all duration-200 sharp-corners border border-[#111111]"
                     style={{
-                      border: selected ? '2px solid #F7931A' : '1px solid #334155',
-                      background: selected ? 'rgba(247,147,26,0.1)' : 'transparent',
+                      background: selected ? '#111111' : 'transparent',
+                      boxShadow: selected ? '4px 4px 0px 0px #CC0000' : 'none',
+                      transform: selected ? 'translate(-2px, -2px)' : 'none',
                     }}
                   >
                     {selected && <CheckBadge />}
                     <span className="text-xl">{p.icon}</span>
-                    <span className="text-[11px] font-mono text-white leading-tight">{p.label}</span>
+                    <span className={`text-[11px] font-mono font-bold leading-tight ${selected ? 'text-white' : 'text-[#111111]'}`}>{p.label}</span>
                   </button>
                 );
               })}
@@ -191,17 +161,18 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
                     role="radio"
                     aria-checked={selected}
                     onClick={() => setTone(t.id)}
-                    className="relative flex items-start gap-2.5 rounded-xl p-3.5 text-left transition-all duration-200 h-full"
+                    className="relative flex flex-col items-center text-center gap-2.5 p-3.5 transition-all duration-200 h-full sharp-corners border border-[#111111]"
                     style={{
-                      border: selected ? '2px solid #F7931A' : '1px solid #334155',
-                      background: selected ? 'rgba(247,147,26,0.1)' : 'transparent',
+                      background: selected ? '#111111' : 'transparent',
+                      boxShadow: selected ? '4px 4px 0px 0px #CC0000' : 'none',
+                      transform: selected ? 'translate(-2px, -2px)' : 'none',
                     }}
                   >
                     {selected && <CheckBadge />}
                     <span className="mt-0.5 text-lg shrink-0">{t.icon}</span>
                     <div className="min-w-0">
-                      <span className="block text-sm font-semibold text-white">{t.label}</span>
-                      <span className="mt-0.5 block text-[11px] leading-snug text-[#94A3B8] line-clamp-2">
+                      <span className={`block text-sm font-bold ${selected ? 'text-white' : 'text-[#111111]'}`}>{t.label}</span>
+                      <span className={`mt-0.5 block text-[11px] font-serif leading-snug line-clamp-2 ${selected ? 'text-[#E5E5E0]' : 'text-[#525252]'}`}>
                         {t.description}
                       </span>
                     </div>
@@ -215,7 +186,7 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
           <div>
             <SectionLabel>
               Key USPs to Highlight
-              <span className="ml-1.5 text-[10px] normal-case tracking-normal text-[#94A3B8]/50">(optional)</span>
+              <span className="ml-1.5 text-[10px] normal-case tracking-normal text-[#737373]">(optional)</span>
             </SectionLabel>
             <div className="flex flex-col gap-2" role="group" aria-label="Key USPs">
               {USPS.map((u) => {
@@ -227,21 +198,21 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
                     role="checkbox"
                     aria-checked={checked}
                     onClick={() => toggleUsp(u.id)}
-                    className={`group flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-all duration-200 border ${checked ? 'border-[#F7931A]/30 bg-[#F7931A]/5' : 'border-white/10 bg-transparent hover:border-white/30'}`}
+                    className={`group flex items-center gap-3 px-3 py-2.5 text-left transition-all duration-200 border border-[#111111] sharp-corners ${checked ? 'bg-[#111111]' : 'bg-transparent hover:bg-[#E5E5E0]'}`}
                   >
                     {/* Custom checkbox square */}
                     <div
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md transition-all duration-200 border-2 ${checked ? 'border-[#F7931A] bg-[#F7931A]' : 'border-white/20 bg-black/40 group-hover:border-[#F7931A]/50'}`}
+                      className={`flex h-5 w-5 shrink-0 items-center justify-center transition-all duration-200 border-2 border-[#111111] sharp-corners ${checked ? 'bg-[#CC0000] border-[#CC0000]' : 'bg-white'}`}
                     >
                       {checked && (
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="square" strokeLinejoin="miter" aria-hidden="true">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                       )}
                     </div>
                     <span
-                      className="text-sm font-mono transition-colors duration-200"
-                      style={{ color: checked ? 'rgba(255,255,255,0.9)' : '#94A3B8' }}
+                      className="text-sm font-mono font-bold transition-colors duration-200"
+                      style={{ color: checked ? '#F9F9F7' : '#111111' }}
                     >
                       {u.label}
                     </span>
@@ -264,11 +235,10 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
                     role="radio"
                     aria-checked={selected}
                     onClick={() => setLanguage(lang.id)}
-                    className="flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-mono transition-all duration-200"
+                    className="flex justify-center flex-1 items-center gap-1.5 px-3.5 py-2 text-sm font-mono font-bold border border-[#111111]"
                     style={{
-                      border: selected ? '1px solid rgba(247,147,26,0.4)' : '1px solid rgba(255,255,255,0.08)',
-                      background: selected ? 'rgba(247,147,26,0.1)' : 'transparent',
-                      color: selected ? '#F7931A' : '#94A3B8',
+                      background: selected ? '#111111' : 'transparent',
+                      color: selected ? '#FFFFFF' : '#111111',
                     }}
                   >
                     <span>{lang.flag}</span>
@@ -278,14 +248,17 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
               })}
             </div>
           </div>
+          
+          {/* Spacer to separate scrollable content from the sticky bottom button */}
+          <div className="h-12 shrink-0" aria-hidden="true" />
 
         </div>{/* end gap-6 flex-col */}
       </div>{/* end scrollable area */}
 
       {/* ── Sticky Generate Button ────────────────────────── */}
-      <div className="mt-4 border-t pt-4" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+      <div className="border-t-4 border-[#111111] p-6 bg-[#F9F9F7] z-10">
         {!isValid && topic.length > 0 && topic.length < 3 && (
-          <p className="mb-2 text-[11px] font-mono" style={{ color: 'rgba(247,147,26,0.7)' }} role="alert">
+          <p className="mb-2 text-[11px] font-mono font-bold text-[#CC0000] uppercase" role="alert">
             Topic must be at least 3 characters
           </p>
         )}
@@ -294,51 +267,16 @@ export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
           onClick={handleSubmit}
           disabled={!isValid || isLoading}
           aria-label="Generate content blueprint"
-          className="group relative w-full overflow-hidden rounded-xl px-6 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:animate-glow-pulse"
-          style={
-            isValid && !isLoading
-              ? {
-                  background: 'linear-gradient(to right, #EA580C, #F7931A)',
-                  boxShadow: '0 0 20px -5px rgba(234,88,12,0.5)',
-                }
-              : {
-                  background: 'rgba(255,255,255,0.05)',
-                  color: 'rgba(255,255,255,0.2)',
-                  cursor: 'not-allowed',
-                }
-          }
-          onMouseEnter={(e) => {
-            if (isValid && !isLoading) {
-              (e.currentTarget as HTMLElement).style.boxShadow = '0 0 30px -5px rgba(247,147,26,0.7)';
-              (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (isValid && !isLoading) {
-              (e.currentTarget as HTMLElement).style.boxShadow = '0 0 20px -5px rgba(234,88,12,0.5)';
-              (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
-            }
-          }}
+          className="w-full py-5 text-lg font-black bg-[#111111] text-white uppercase tracking-tighter hover:bg-[#CC0000] disabled:bg-[#A3A3A3] disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
-              <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
-                <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" />
-              </svg>
-              Generating Blueprint…
+              <span className="animate-pulse">TYPESETTING...</span>
             </span>
           ) : (
             <span className="flex items-center justify-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-              </svg>
-              Generate Content Blueprint
+              PRINT CONTENT BLUEPRINT
             </span>
-          )}
-          {/* Shimmer sweep */}
-          {isValid && !isLoading && (
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
           )}
         </button>
       </div>

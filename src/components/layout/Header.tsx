@@ -16,37 +16,37 @@ export default function Header({ historyCount = 0, onHistoryToggle }: HeaderProp
   useEffect(() => setMounted(true), []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#030304]/95 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b-4 border-[#111111] bg-[#F9F9F7] newsprint-texture">
+      <div className="mx-auto flex min-h-[5rem] max-w-screen-xl items-center justify-between px-4 lg:px-8">
 
         {/* Logo */}
-        <Link href="/" className="group flex items-center gap-3" aria-label="UniFeed AI Home">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#EA580C] to-[#F7931A] shadow-[0_0_16px_-4px_rgba(234,88,12,0.6)] transition-transform group-hover:scale-105">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-heading text-base font-bold text-white">
-              UniFeed{' '}
-              <span className="bg-gradient-to-r from-[#F7931A] to-[#FFD600] bg-clip-text text-transparent">AI</span>
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#F7931A]/40">
-              by UniforMeFy
-            </span>
-          </div>
+        <Link href="/" className="group flex flex-col justify-center leading-none text-[#111111] hover:text-[#CC0000] transition-colors" aria-label="UniFeed AI Home">
+          <span className="font-heading text-4xl font-black tracking-tighter">
+            UniFeed.
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-[#525252] mt-1">
+            The Content Record
+          </span>
         </Link>
 
+        {/* Edition Metadata */}
+        <div className="flex flex-col items-center justify-center font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-[#111111]">
+          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 border-b border-[#111111] pb-1 mb-1">
+            <span className="hidden sm:inline">Vol. 1.0</span>
+            <span className="hidden sm:inline h-2 w-px bg-[#111111]"></span>
+            <span>{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+            <span className="h-2 w-px bg-[#111111]"></span>
+            <span>B2B Edition</span>
+          </div>
+          <span className="text-[#525252] hidden sm:inline">All the Threads That Fit the Brand</span>
+        </div>
+
         {/* Nav */}
-        <nav className="flex items-center gap-1" aria-label="Main navigation">
+        <nav className="flex items-center gap-2" aria-label="Main navigation">
           <Link
             href="/"
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-mono transition-all ${
-              pathname === '/'
-                ? 'border border-[#F7931A]/20 bg-[#F7931A]/10 text-[#F7931A]'
-                : 'text-[#94A3B8] hover:bg-white/5 hover:text-white'
+            className={`btn-editorial-outline px-3 py-1.5 text-xs ${
+              pathname === '/' ? 'bg-[#111111] text-[#F9F9F7] shadow-[4px_4px_0px_0px_#CC0000] border-[#CC0000]' : ''
             }`}
             aria-current={pathname === '/' ? 'page' : undefined}
           >
@@ -55,29 +55,25 @@ export default function Header({ historyCount = 0, onHistoryToggle }: HeaderProp
 
           <Link
             href="/swipe-file"
-            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-mono transition-all ${
-              pathname === '/swipe-file'
-                ? 'border border-[#F7931A]/20 bg-[#F7931A]/10 text-[#F7931A]'
-                : 'text-[#94A3B8] hover:bg-white/5 hover:text-white'
+            className={`btn-editorial-outline px-3 py-1.5 text-xs ${
+              pathname === '/swipe-file' ? 'bg-[#111111] text-[#F9F9F7] shadow-[4px_4px_0px_0px_#CC0000] border-[#CC0000]' : ''
             }`}
             aria-current={pathname === '/swipe-file' ? 'page' : undefined}
           >
-            Swipe File
+            Saved Ideas
           </Link>
 
           {onHistoryToggle && (
             <button
               type="button"
               onClick={onHistoryToggle}
-              className="relative ml-1 flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs font-mono text-[#94A3B8] transition-all hover:border-white/20 hover:text-white"
+              className="btn-editorial px-3 py-1.5 text-xs ml-2"
               aria-label="Toggle history panel"
             >
               History
-              {/* Only render badge after client mount to avoid hydration mismatch */}
               {mounted && historyCount > 0 && (
                 <span
-                  className="flex h-4 w-4 items-center justify-center rounded-full bg-[#F7931A] font-bold text-[#030304]"
-                  style={{ fontSize: '9px' }}
+                  className="ml-1.5 bg-[#F9F9F7] text-[#111111] px-1 font-mono text-[10px]"
                 >
                   {historyCount > 9 ? '9+' : historyCount}
                 </span>

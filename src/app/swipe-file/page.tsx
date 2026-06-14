@@ -155,19 +155,19 @@ export default function SwipeFilePage() {
 
   // ── Render ───────────────────────────────────────────────────
   return (
-    <div className="flex min-h-screen flex-col bg-[#030304]">
+    <div className="flex min-h-screen flex-col bg-[#F9F9F7]">
       {/* Header */}
       <Header />
 
       {/* Main Content */}
-      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
         {/* ── Toolbar ──────────────────────────────────────────── */}
-        <div className="mb-6 space-y-4">
+        <div className="mb-8 space-y-6">
           {/* Title row */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b-4 border-[#111111] pb-4">
             <div>
-              <h1 className="text-2xl font-bold text-white">Swipe File</h1>
-              <p className="mt-0.5 text-sm text-white/50">
+              <h1 className="text-4xl font-heading font-black text-[#111111] uppercase tracking-tighter">Saved Ideas</h1>
+              <p className="mt-2 text-sm font-serif italic text-[#525252]">
                 {filteredEntries.length === entries.length
                   ? `${entries.length} saved idea${entries.length !== 1 ? 's' : ''}`
                   : `${filteredEntries.length} of ${entries.length} idea${entries.length !== 1 ? 's' : ''}`}
@@ -176,7 +176,7 @@ export default function SwipeFilePage() {
 
             {/* View toggle */}
             <div
-              className="flex items-center rounded-lg border border-white/10 bg-white/5 p-0.5"
+              className="flex items-center border-2 border-[#111111] bg-white p-0.5 sharp-corners"
               role="radiogroup"
               aria-label="View mode"
             >
@@ -185,13 +185,13 @@ export default function SwipeFilePage() {
                 role="radio"
                 aria-checked={viewMode === 'grid'}
                 onClick={() => setViewMode('grid')}
-                className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-widest transition-colors sharp-corners ${
                   viewMode === 'grid'
-                    ? 'bg-[#F7931A]/20 text-[#F7931A]'
-                    : 'text-white/50 hover:text-white/80'
+                    ? 'bg-[#111111] text-[#F9F9F7]'
+                    : 'text-[#111111] hover:bg-[#E5E5E0]'
                 }`}
               >
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -213,10 +213,10 @@ export default function SwipeFilePage() {
                 role="radio"
                 aria-checked={viewMode === 'list'}
                 onClick={() => setViewMode('list')}
-                className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-widest transition-colors sharp-corners ${
                   viewMode === 'list'
-                    ? 'bg-[#F7931A]/20 text-[#F7931A]'
-                    : 'text-white/50 hover:text-white/80'
+                    ? 'bg-[#111111] text-[#F9F9F7]'
+                    : 'text-[#111111] hover:bg-[#E5E5E0]'
                 }`}
               >
                 <span className="flex items-center gap-1.5">
@@ -240,14 +240,14 @@ export default function SwipeFilePage() {
           </div>
 
           {/* Filter bar */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             {/* Search */}
             <div className="relative flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30"
+                className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#111111]"
                 aria-hidden="true"
               >
                 <path
@@ -258,11 +258,12 @@ export default function SwipeFilePage() {
               </svg>
               <input
                 type="text"
-                placeholder="Search ideas…"
+                placeholder="SEARCH IDEAS..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-white/10 bg-white/5 py-2 pl-10 pr-4 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-[#F7931A]/50 focus:ring-1 focus:ring-[#F7931A]/30"
-                aria-label="Search swipe file entries"
+                style={{ paddingLeft: '3.5rem' }}
+                className="w-full border-2 border-[#111111] bg-white py-3 pr-4 text-sm font-mono font-bold uppercase tracking-widest text-[#111111] placeholder:text-[#A3A3A3] outline-none sharp-corners focus:border-[#CC0000] focus:ring-0"
+                aria-label="Search saved ideas"
               />
             </div>
 
@@ -272,10 +273,10 @@ export default function SwipeFilePage() {
               onChange={(e) =>
                 setPlatformFilter(e.target.value as 'all' | Platform)
               }
-              className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-[#F7931A]/50 [&>option]:bg-[#0F1115] [&>option]:text-white"
+              className="border-2 border-[#111111] bg-white px-4 py-3 text-sm font-mono font-bold uppercase tracking-widest text-[#111111] outline-none sharp-corners focus:border-[#CC0000] focus:ring-0 [&>option]:bg-white [&>option]:text-[#111111]"
               aria-label="Filter by platform"
             >
-              <option value="all">All Platforms</option>
+              <option value="all">ALL PLATFORMS</option>
               {PLATFORMS.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.icon} {p.label}
@@ -289,10 +290,10 @@ export default function SwipeFilePage() {
               onChange={(e) =>
                 setSegmentFilter(e.target.value as 'all' | Segment)
               }
-              className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-[#F7931A]/50 [&>option]:bg-[#0F1115] [&>option]:text-white"
+              className="border-2 border-[#111111] bg-white px-4 py-3 text-sm font-mono font-bold uppercase tracking-widest text-[#111111] outline-none sharp-corners focus:border-[#CC0000] focus:ring-0 [&>option]:bg-white [&>option]:text-[#111111]"
               aria-label="Filter by segment"
             >
-              <option value="all">All Segments</option>
+              <option value="all">ALL SEGMENTS</option>
               {SEGMENTS.map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.icon} {s.label}
@@ -306,10 +307,10 @@ export default function SwipeFilePage() {
               onChange={(e) =>
                 setToneFilter(e.target.value as 'all' | Tone)
               }
-              className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-[#F7931A]/50 [&>option]:bg-[#0F1115] [&>option]:text-white"
+              className="border-2 border-[#111111] bg-white px-4 py-3 text-sm font-mono font-bold uppercase tracking-widest text-[#111111] outline-none sharp-corners focus:border-[#CC0000] focus:ring-0 [&>option]:bg-white [&>option]:text-[#111111]"
               aria-label="Filter by tone"
             >
-              <option value="all">All Tones</option>
+              <option value="all">ALL TONES</option>
               {TONES.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.icon} {t.label}
@@ -319,13 +320,13 @@ export default function SwipeFilePage() {
           </div>
 
           {/* Bulk actions bar */}
-          <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-white/[0.02] px-4 py-2">
-            <label className="flex cursor-pointer items-center gap-2 text-sm text-white/60">
+          <div className="flex items-center gap-4 border-2 border-[#111111] bg-white px-5 py-3 sharp-corners shadow-[4px_4px_0px_0px_#111111]">
+            <label className="flex cursor-pointer items-center gap-3 text-sm font-mono font-bold uppercase tracking-widest text-[#111111]">
               <input
                 type="checkbox"
                 checked={isAllSelected}
                 onChange={toggleSelectAll}
-                className="h-4 w-4 rounded border-white/20 bg-white/5 text-[#F7931A] accent-[#F7931A]"
+                className="h-5 w-5 border-2 border-[#111111] bg-white text-[#111111] accent-[#111111] sharp-corners"
                 aria-label="Select all visible entries"
               />
               Select All
@@ -333,21 +334,21 @@ export default function SwipeFilePage() {
 
             {selectedIds.size > 0 && (
               <>
-                <span className="text-xs text-white/40">
-                  {selectedIds.size} selected
+                <span className="text-xs font-mono font-bold text-[#CC0000] uppercase tracking-widest">
+                  {selectedIds.size} Selected
                 </span>
-                <div className="h-4 w-px bg-white/10" role="separator" />
+                <div className="h-5 w-0.5 bg-[#111111]" role="separator" />
                 <button
                   type="button"
                   onClick={handleExportSelected}
-                  className="flex items-center gap-1.5 rounded-md bg-[#F7931A]/10 px-3 py-1 text-xs font-medium text-[#F7931A] transition-colors hover:bg-[#F7931A]/20"
+                  className="flex items-center gap-2 border border-[#111111] bg-white px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-widest text-[#111111] hover:bg-[#111111] hover:text-white transition-colors sharp-corners"
                   aria-label="Export selected entries as CSV"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="h-3.5 w-3.5"
+                    className="h-4 w-4"
                     aria-hidden="true"
                   >
                     <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
@@ -358,14 +359,14 @@ export default function SwipeFilePage() {
                 <button
                   type="button"
                   onClick={handleDeleteSelected}
-                  className="flex items-center gap-1.5 rounded-md bg-red-500/10 px-3 py-1 text-xs font-medium text-red-400 transition-colors hover:bg-red-500/20"
+                  className="flex items-center gap-2 border border-[#CC0000] bg-white px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-widest text-[#CC0000] hover:bg-[#CC0000] hover:text-white transition-colors sharp-corners ml-auto"
                   aria-label="Delete selected entries"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="h-3.5 w-3.5"
+                    className="h-4 w-4"
                     aria-hidden="true"
                   >
                     <path
@@ -448,88 +449,79 @@ function SwipeCard({
 
   return (
     <article
-      className={`group relative rounded-xl border bg-[#0F1115]/80 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#F7931A]/5 ${
+      className={`group relative border-2 border-[#111111] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#111111] ${
         isSelected
-          ? 'border-[#F7931A]/40 ring-1 ring-[#F7931A]/20'
-          : 'border-white/10 hover:border-white/20'
-      } ${isGrid ? 'flex flex-col' : 'flex flex-row items-start gap-4'}`}
-      aria-label={`Swipe file entry: ${entry.topic}`}
+          ? 'border-[#CC0000] ring-1 ring-[#CC0000] shadow-[4px_4px_0px_0px_#CC0000]'
+          : 'shadow-[2px_2px_0px_0px_#111111]'
+      } ${isGrid ? 'flex flex-col' : 'flex flex-row items-start gap-4'} sharp-corners`}
+      aria-label={`Saved idea: ${entry.topic}`}
     >
       {/* Checkbox */}
       <div
-        className={`${isGrid ? 'absolute left-3 top-3' : 'flex-shrink-0 pl-4 pt-4'} z-10`}
+        className={`${isGrid ? 'absolute right-4 top-4' : 'flex-shrink-0 pl-4 pt-4'} z-10`}
       >
         <input
           type="checkbox"
           checked={isSelected}
           onChange={onToggleSelect}
-          className="h-4 w-4 cursor-pointer rounded border-white/20 bg-white/5 text-[#F7931A] accent-[#F7931A]"
+          className="h-5 w-5 cursor-pointer border-2 border-[#111111] bg-white text-[#111111] accent-[#111111] sharp-corners"
           aria-label={`Select ${entry.topic}`}
         />
       </div>
 
       {/* Card body */}
-      <div className={`flex flex-1 flex-col gap-3 p-4 ${isGrid ? '' : 'py-4'}`}>
+      <div className={`flex flex-1 flex-col gap-4 p-5 ${isGrid ? '' : 'py-5'}`}>
         {/* Top row: platform badge + tone badge */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span
-            className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-white"
-            style={{ backgroundColor: `${platformColor}30`, color: platformColor }}
+            className="inline-flex items-center border border-[#111111] bg-[#111111] px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-widest text-[#F9F9F7] sharp-corners"
           >
             {platformLabel}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2 py-0.5 text-xs font-medium text-white/60">
+          <span className="inline-flex items-center border border-[#111111] bg-white px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111] sharp-corners">
             {toneIcon} {toneLabel}
           </span>
         </div>
 
         {/* Topic */}
-        <h3 className="text-sm font-semibold text-white">{entry.topic}</h3>
+        <h3 className="text-xl font-heading font-black text-[#111111] uppercase tracking-tighter line-clamp-2 leading-tight">
+          {entry.topic}
+        </h3>
 
         {/* First hook */}
         {firstHook && (
-          <p className="text-sm leading-relaxed text-[#F7931A]/80">
+          <p className="text-base font-serif italic leading-relaxed text-[#111111]">
             &ldquo;{firstHook}&rdquo;
           </p>
         )}
 
         {/* Body preview */}
-        <p className="text-xs leading-relaxed text-white/40">{truncatedBody}</p>
+        <p className="text-sm leading-relaxed font-serif text-[#525252] line-clamp-3">
+          {truncatedBody}
+        </p>
 
         {/* Bottom row: meta + actions */}
-        <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-3">
+        <div className="mt-auto flex items-center justify-between border-t-2 border-[#111111] pt-4">
           <div className="flex items-center gap-3">
-            <span className="text-[11px] text-white/30">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#525252]">
               {getRelativeTime(entry.savedAt)}
             </span>
-            <span className="text-[11px] text-white/30">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#525252]">
               {entry.idea.hashtags.length} hashtag{entry.idea.hashtags.length !== 1 ? 's' : ''}
             </span>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             {/* Copy button */}
             <button
               type="button"
               onClick={onCopy}
-              className="rounded-md p-1.5 text-white/30 transition-colors hover:bg-white/5 hover:text-white/70"
+              className="flex items-center justify-center border border-[#111111] bg-white p-2 text-[#111111] hover:bg-[#111111] hover:text-white transition-colors sharp-corners"
               aria-label={isCopied ? 'Copied!' : `Copy ${entry.topic} content`}
               title={isCopied ? 'Copied!' : 'Copy to clipboard'}
             >
               {isCopied ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-4 w-4 text-green-400"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <span className="font-bold h-4 w-4 flex items-center justify-center">✓</span>
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -548,7 +540,7 @@ function SwipeCard({
             <button
               type="button"
               onClick={onDelete}
-              className="rounded-md p-1.5 text-white/30 transition-colors hover:bg-red-500/10 hover:text-red-400"
+              className="flex items-center justify-center border border-[#111111] bg-white p-2 text-[#CC0000] hover:bg-[#CC0000] hover:border-[#CC0000] hover:text-white transition-colors sharp-corners"
               aria-label={`Delete ${entry.topic}`}
               title="Delete"
             >
@@ -578,50 +570,24 @@ function SwipeCard({
 // ================================================================
 function EmptyState({ hasEntries }: { hasEntries: boolean }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 px-6 py-24">
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/5">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-8 w-8 text-white/20"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625zM7.5 15a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 017.5 15zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H8.25z"
-            clipRule="evenodd"
-          />
-          <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-        </svg>
+    <div className="flex flex-col items-center justify-center border-[3px] border-dashed border-[#111111] bg-[#F9F9F7] px-6 py-24 sharp-corners">
+      <div className="mb-6 flex h-20 w-20 items-center justify-center border-4 border-[#111111] bg-white text-4xl sharp-corners shadow-[4px_4px_0px_0px_#111111]">
+        ?
       </div>
-      <h2 className="text-lg font-semibold text-white/60">
-        {hasEntries ? 'No matching ideas' : 'Your swipe file is empty'}
+      <h2 className="text-2xl font-heading font-black text-[#111111] uppercase tracking-tighter">
+        {hasEntries ? 'No matching ideas' : 'No Saved Ideas'}
       </h2>
-      <p className="mt-1 text-sm text-white/30">
+      <p className="mt-2 text-base font-serif italic text-[#525252]">
         {hasEntries
           ? 'Try adjusting your filters or search query.'
-          : 'Save content ideas from the dashboard to build your swipe file.'}
+          : 'Save content ideas from the dashboard to build your collection.'}
       </p>
       {!hasEntries && (
         <Link
           href="/"
-          className="mt-6 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#EA580C] to-[#F7931A] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#F7931A]/20 transition-transform hover:scale-105"
+          className="mt-8 btn-editorial px-8 py-4 text-base"
         >
-          Go to Dashboard
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="h-4 w-4"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 10a.75.75 0 01.75-.75h10.638l-3.96-4.158a.75.75 0 111.08-1.04l5.25 5.5a.75.75 0 010 1.08l-5.25 5.5a.75.75 0 11-1.08-1.04l3.96-4.158H3.75A.75.75 0 013 10z"
-              clipRule="evenodd"
-            />
-          </svg>
+          RETURN TO PRESS
         </Link>
       )}
     </div>

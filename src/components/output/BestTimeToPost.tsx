@@ -7,33 +7,24 @@ interface BestTimeToPostProps {
   postingTimes: PostingTime[];
 }
 
-/** Platform-specific styling configuration — Bitcoin DeFi palette */
+/** Platform-specific styling configuration — Newsprint palette */
 const platformStyles: Record<
   Platform,
-  { label: string; gradient: string; badge: string; dot: string; icon: string; glow: string }
+  { label: string; badge: string; icon: string }
 > = {
   linkedin: {
     label: 'LinkedIn',
-    gradient: 'from-[#0A66C2]/10 to-[#0A66C2]/5',
-    badge: 'bg-[#0A66C2]/20 text-blue-300 border-[#0A66C2]/30',
-    dot: 'bg-blue-400',
-    glow: 'shadow-blue-500/20',
+    badge: 'border-[#111111] bg-white text-[#111111]',
     icon: '💼',
   },
   'instagram-post': {
     label: 'Instagram Post',
-    gradient: 'from-[#E1306C]/10 to-[#E1306C]/5',
-    badge: 'bg-[#E1306C]/20 text-pink-300 border-[#E1306C]/30',
-    dot: 'bg-pink-400',
-    glow: 'shadow-pink-500/20',
+    badge: 'border-[#111111] bg-white text-[#111111]',
     icon: '📸',
   },
   'instagram-reels': {
     label: 'Instagram Reels',
-    gradient: 'from-[#833AB4]/10 to-[#833AB4]/5',
-    badge: 'bg-[#833AB4]/20 text-purple-300 border-[#833AB4]/30',
-    dot: 'bg-purple-400',
-    glow: 'shadow-purple-500/20',
+    badge: 'border-[#111111] bg-white text-[#111111]',
     icon: '🎬',
   },
 };
@@ -83,11 +74,11 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
   return (
     <section className="mt-8" aria-label="Best times to post">
       {/* Section header */}
-      <div className="mb-4 flex items-center gap-2.5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F7931A]/20 bg-[#F7931A]/10 text-base">
+      <div className="mb-4 flex items-center gap-3 border-b-4 border-[#111111] pb-2">
+        <div className="flex h-8 w-8 items-center justify-center border-2 border-[#111111] bg-[#111111] text-white sharp-corners text-base">
           🕐
         </div>
-        <h3 className="font-heading text-base font-semibold text-white">
+        <h3 className="font-heading text-xl font-black text-[#111111] uppercase tracking-tighter">
           Best Time to Post
         </h3>
       </div>
@@ -101,31 +92,31 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
           return (
             <article
               key={`${pt.platform}-${idx}`}
-              className={`relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br ${style.gradient} bg-[#0F1115] p-5 transition-all duration-300 hover:border-[#F7931A]/20 hover:shadow-[0_0_20px_-8px_rgba(247,147,26,0.2)]`}
+              className="relative overflow-hidden border-2 border-[#111111] bg-[#F9F9F7] p-5 transition-all duration-300 hover:bg-[#E5E5E0] sharp-corners shadow-[4px_4px_0px_0px_#111111]"
             >
               {/* Decorative clock watermark */}
-              <div className="pointer-events-none absolute -right-3 -top-3 text-5xl opacity-[0.05]" aria-hidden="true">
+              <div className="pointer-events-none absolute -right-3 -top-3 text-5xl opacity-10 grayscale" aria-hidden="true">
                 🕐
               </div>
 
               {/* Platform badge */}
-              <div className="mb-3 flex items-center gap-2">
+              <div className="mb-4 flex items-center gap-2 border-b border-[#111111] pb-3">
                 <span className="text-base" aria-hidden="true">{style.icon}</span>
-                <span className={`rounded-full border px-2.5 py-0.5 text-xs font-mono font-semibold ${style.badge}`}>
+                <span className={`border-2 px-2.5 py-0.5 text-xs font-mono font-bold uppercase tracking-widest sharp-corners ${style.badge}`}>
                   {style.label}
                 </span>
               </div>
 
               {/* Best Days */}
-              <div className="mb-3">
-                <h4 className="mb-1.5 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+              <div className="mb-4">
+                <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
                   Best Days
                 </h4>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {pt.bestDays.map((day) => (
                     <span
                       key={day}
-                      className="rounded-md border border-white/10 bg-white/[0.06] px-2 py-0.5 text-xs font-mono text-white/80"
+                      className="border border-[#111111] bg-white px-2 py-0.5 text-xs font-mono font-bold text-[#111111] sharp-corners"
                     >
                       {day}
                     </span>
@@ -134,15 +125,15 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
               </div>
 
               {/* Best Times */}
-              <div className="mb-3">
-                <h4 className="mb-1.5 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+              <div className="mb-4">
+                <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
                   Best Times
                 </h4>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {pt.bestTimes.map((time) => (
                     <span
                       key={time}
-                      className="rounded-md border border-[#F7931A]/20 bg-[#F7931A]/10 px-2 py-0.5 text-xs font-mono font-semibold text-[#F7931A]"
+                      className="border-2 border-[#111111] bg-[#111111] px-2 py-0.5 text-xs font-mono font-bold text-white sharp-corners"
                     >
                       {time}
                     </span>
@@ -151,8 +142,8 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
               </div>
 
               {/* Visual Timeline */}
-              <div className="mb-3">
-                <h4 className="mb-2 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+              <div className="mb-4">
+                <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
                   Timeline
                 </h4>
                 <div
@@ -164,14 +155,14 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
                     return (
                       <div key={slot} className="flex flex-col items-center" title={slot}>
                         <div
-                          className={`h-2.5 w-full min-w-[18px] rounded-sm transition-colors ${
+                          className={`h-4 w-full min-w-[18px] transition-colors border-y border-[#111111] ${
                             highlighted
-                              ? `bg-[#F7931A] shadow-[0_0_6px_1px_rgba(247,147,26,0.5)]`
-                              : 'bg-white/[0.06]'
+                              ? `bg-[#111111] border-[#111111]`
+                              : 'bg-white'
                           }`}
                           aria-label={`${slot}${highlighted ? ' — recommended' : ''}`}
                         />
-                        <span className="mt-1 text-[8px] leading-none text-[#94A3B8]/60">
+                        <span className="mt-1 text-[8px] leading-none font-mono font-bold text-[#525252]">
                           {slot.replace(' ', '')}
                         </span>
                       </div>
@@ -182,7 +173,7 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
 
               {/* Timezone */}
               {pt.timezone && (
-                <p className="mb-2 font-mono text-[10px] text-[#94A3B8]/60">
+                <p className="mb-2 font-mono font-bold text-[10px] text-[#525252] uppercase">
                   {pt.timezone}
                 </p>
               )}
@@ -194,29 +185,29 @@ export default function BestTimeToPost({ postingTimes }: BestTimeToPostProps) {
                     type="button"
                     onClick={() => toggleReasoning(idx)}
                     aria-expanded={isExpanded}
-                    className="flex items-center gap-1.5 text-[11px] font-mono font-medium text-[#F7931A]/70 transition-colors hover:text-[#F7931A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7931A]/60 rounded"
+                    className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#111111] transition-colors hover:text-[#CC0000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
                   >
                     <svg
-                      className={`h-3 w-3 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
+                      className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth={2.5}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      strokeWidth={3}
+                      strokeLinecap="square"
+                      strokeLinejoin="miter"
                       aria-hidden="true"
                     >
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
-                    Why?
+                    Explanation
                   </button>
                   <div
                     className={`overflow-hidden transition-all duration-300 ${
-                      isExpanded ? 'mt-2 max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                      isExpanded ? 'mt-3 max-h-40 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <p className="text-xs leading-relaxed text-[#94A3B8]">
+                    <p className="text-sm leading-relaxed font-serif text-[#111111]">
                       {pt.reasoning}
                     </p>
                   </div>

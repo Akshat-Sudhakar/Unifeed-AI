@@ -73,7 +73,7 @@ export default function DashboardPage() {
   const hasContent = isLoading || !!result || !!error;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#030304' }} className="flex flex-col">
+    <div className="flex flex-col">
       <Header
         historyCount={blueprints.length}
         onHistoryToggle={() => setHistoryOpen((o) => !o)}
@@ -112,24 +112,20 @@ export default function DashboardPage() {
           className="transition-all duration-700 ease-in-out"
           style={{ 
             flex: hasContent ? '0 0 45%' : '0 0 100%', 
-            maxWidth: hasContent ? '45%' : '640px', 
+            maxWidth: hasContent ? '45%' : '800px', 
             minWidth: '340px' 
           }}
         >
           {/* Sticky card that fills the viewport height */}
           <div
-            className="rounded-2xl border"
+            className="border-2 border-[#111111] bg-[#F9F9F7] sharp-corners"
             style={{
-              background: '#0F1115',
-              borderColor: 'rgba(255,255,255,0.08)',
               position: 'sticky',
-              top: '72px',
-              /* Exact height = viewport minus header minus 2×vertical padding */
-              height: 'calc(100vh - 72px - 48px)',
+              top: '96px',
+              height: 'calc(100vh - 96px - 48px)',
               display: 'flex',
               flexDirection: 'column',
               overflow: 'hidden',
-              padding: '24px',
             }}
           >
             <InputPanel onGenerate={handleGenerate} isLoading={isLoading} />
@@ -146,16 +142,14 @@ export default function DashboardPage() {
           {/* Error */}
           {error && (
             <div
-              className="mb-6 flex items-start gap-3 rounded-xl border p-4 animate-slide-down"
-              style={{ borderColor: 'rgba(239,68,68,0.3)', background: 'rgba(239,68,68,0.05)' }}
+              className="mb-6 flex items-start gap-3 border-2 border-[#CC0000] bg-white p-4 animate-slide-down sharp-corners"
               role="alert"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mt-0.5 shrink-0 text-red-400">
-                <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
+              <span className="text-[#CC0000] font-bold text-xl mt-0.5">!</span>
               <div>
-                <p className="font-medium text-red-300">{error}</p>
-                <button type="button" onClick={reset} className="mt-1.5 text-sm text-red-400 underline hover:text-red-300">
+                <p className="font-bold text-[#CC0000] font-mono text-sm uppercase tracking-widest">Error Processing Request</p>
+                <p className="font-serif text-[#111111]">{error}</p>
+                <button type="button" onClick={reset} className="mt-2 text-xs font-bold uppercase tracking-widest text-[#111111] underline decoration-[#CC0000] hover:text-[#CC0000]">
                   Dismiss
                 </button>
               </div>
@@ -165,25 +159,21 @@ export default function DashboardPage() {
           {/* Loading */}
           {isLoading && (
             <div className="flex flex-col items-center justify-center py-32 animate-fade-in">
-              <div className="relative mb-8">
-                <div className="h-16 w-16 rounded-full" style={{ border: '4px solid rgba(255,255,255,0.05)' }} />
-                <div
-                  className="absolute inset-0 h-16 w-16 animate-spin rounded-full"
-                  style={{ border: '4px solid transparent', borderTopColor: '#F7931A' }}
-                />
-                <div
-                  className="absolute inset-2 h-12 w-12 animate-spin rounded-full"
-                  style={{ border: '4px solid transparent', borderTopColor: '#FFD600', animationDirection: 'reverse', animationDuration: '1.5s' }}
-                />
-              </div>
-              <h3 className="font-heading text-xl font-semibold text-white">Crafting Your Blueprint</h3>
-              <p className="mt-2 max-w-xs text-center text-sm" style={{ color: '#94A3B8' }}>
-                AI is generating hyper-targeted content for UniforMeFy…
-              </p>
-              <div className="mt-5 flex gap-1.5">
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="h-2 w-2 animate-bounce rounded-full" style={{ background: '#F7931A', animationDelay: `${i * 0.15}s` }} />
-                ))}
+              <div className="border-2 border-[#111111] bg-white px-8 py-10 text-center max-w-sm w-full sharp-corners hard-shadow-hover">
+                <div className="mb-6 font-mono text-xs font-bold uppercase tracking-widest text-[#CC0000] animate-pulse">
+                  System Processing...
+                </div>
+                <h3 className="font-heading text-4xl font-black text-[#111111] mb-4">
+                  Printing Press Active
+                </h3>
+                <p className="font-serif text-[#525252] italic mb-6">
+                  Assembling intelligence, typesetting components, and preparing the final blueprint.
+                </p>
+                <div className="flex gap-1.5 justify-center">
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className="h-4 w-3 bg-[#111111] animate-typeset sharp-corners" style={{ animationDelay: `${i * 0.15}s` }} />
+                  ))}
+                </div>
               </div>
             </div>
           )}

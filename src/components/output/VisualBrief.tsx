@@ -26,48 +26,48 @@ export default function VisualBrief({ brief }: VisualBriefProps) {
   }, [isOpen]);
 
   return (
-    <div className="mt-4 overflow-hidden rounded-xl border border-[#F7931A]/15 bg-[#F7931A]/5">
+    <div className="mt-8 overflow-hidden border border-[#111111] bg-[#F9F9F7] sharp-corners">
       {/* Header / Toggle */}
       <button
         type="button"
         onClick={toggle}
         aria-expanded={isOpen}
         aria-controls="visual-brief-content"
-        className="flex w-full items-center justify-between gap-3 px-5 py-3.5 text-left transition-colors hover:bg-[#F7931A]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7931A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#030304]"
+        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left transition-colors hover:bg-[#E5E5E0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2 focus-visible:ring-offset-white border-b border-[#111111]"
       >
-        <span className="flex items-center gap-2.5 text-sm font-semibold text-white">
+        <span className="flex items-center gap-3 text-sm font-bold text-[#111111]">
           {/* Eye icon */}
           <svg
-            className="h-4 w-4 text-[#F7931A]"
+            className="h-5 w-5 text-[#111111]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeWidth={3}
+            strokeLinecap="square"
+            strokeLinejoin="miter"
             aria-hidden="true"
           >
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
             <circle cx={12} cy={12} r={3} />
           </svg>
-          <span className="font-mono text-[11px] uppercase tracking-widest text-[#F7931A]">
+          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#111111]">
             Visual Brief
           </span>
         </span>
 
         {/* Chevron */}
         <svg
-          className={`h-4 w-4 text-[#F7931A]/60 transition-transform duration-300 ${
+          className={`h-5 w-5 text-[#111111] transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          strokeWidth={3}
+          strokeLinecap="square"
+          strokeLinejoin="miter"
           aria-hidden="true"
         >
           <polyline points="6 9 12 15 18 9" />
@@ -82,13 +82,13 @@ export default function VisualBrief({ brief }: VisualBriefProps) {
         style={{ maxHeight: isOpen ? `${contentHeight}px` : '0px' }}
         className="overflow-hidden transition-[max-height] duration-400 ease-in-out"
       >
-        <div ref={contentRef} className="space-y-5 border-t border-[#F7931A]/10 px-5 pb-5 pt-4">
+        <div ref={contentRef} className="space-y-6 px-5 pb-6 pt-5">
           {/* Description */}
           <div>
-            <h4 className="mb-1.5 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+            <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
               Description
             </h4>
-            <p className="text-sm leading-relaxed text-white/80">
+            <p className="text-base leading-relaxed font-serif text-[#111111]">
               {brief.description}
             </p>
           </div>
@@ -96,19 +96,19 @@ export default function VisualBrief({ brief }: VisualBriefProps) {
           {/* Color Palette */}
           {brief.colorPalette.length > 0 && (
             <div>
-              <h4 className="mb-2.5 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+              <h4 className="mb-3 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
                 Color Palette
               </h4>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4">
                 {brief.colorPalette.map((color) => (
-                  <div key={color} className="flex flex-col items-center gap-1.5">
+                  <div key={color} className="flex flex-col items-center gap-2">
                     <div
-                      className="h-9 w-9 rounded-full border-2 border-white/20 shadow-lg"
+                      className="h-10 w-10 border-2 border-[#111111] sharp-corners"
                       style={{ backgroundColor: color }}
                       title={color}
                       aria-label={`Color swatch: ${color}`}
                     />
-                    <span className="font-mono text-[10px] text-[#94A3B8]">
+                    <span className="font-mono text-[10px] font-bold uppercase text-[#525252]">
                       {color}
                     </span>
                   </div>
@@ -120,10 +120,10 @@ export default function VisualBrief({ brief }: VisualBriefProps) {
           {/* Composition */}
           {brief.composition && (
             <div>
-              <h4 className="mb-1.5 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+              <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
                 Composition
               </h4>
-              <p className="text-sm leading-relaxed text-white/80">
+              <p className="text-base leading-relaxed font-serif text-[#111111]">
                 {brief.composition}
               </p>
             </div>
@@ -132,10 +132,10 @@ export default function VisualBrief({ brief }: VisualBriefProps) {
           {/* Style */}
           {brief.style && (
             <div>
-              <h4 className="mb-1.5 text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
+              <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-widest text-[#111111]">
                 Style
               </h4>
-              <p className="text-sm leading-relaxed text-white/80">
+              <p className="text-base leading-relaxed font-serif text-[#111111]">
                 {brief.style}
               </p>
             </div>

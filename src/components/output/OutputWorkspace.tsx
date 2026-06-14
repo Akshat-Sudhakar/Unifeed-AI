@@ -153,31 +153,36 @@ export default function OutputWorkspace({
     return (
       <section
         aria-label="Output workspace"
-        className="flex min-h-[420px] flex-col items-center justify-center rounded-2xl border border-white/[0.07] bg-[#0F1115] p-10 text-center"
+        className="flex min-h-[420px] flex-col items-center justify-center border-2 border-[#111111] bg-white p-10 text-center sharp-corners hard-shadow-hover"
       >
-        {/* Illustration-like decorative element */}
-        <div className="relative mb-6">
-          <div className="absolute -inset-4 rounded-full bg-[#F7931A]/5 blur-xl" />
-          <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-[#F7931A]/15 bg-[#F7931A]/8 text-4xl">
-            ✨
-          </div>
+        {/* Newspaper Illustration */}
+        <div className="relative mb-8">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#111111" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+            <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4" />
+            <polyline points="14 2 14 8 20 8" />
+            <path d="M2 15h10" />
+            <path d="M2 18h10" />
+            <path d="M2 21h10" />
+          </svg>
+          {/* Accent block */}
+          <div className="absolute -bottom-2 -right-2 h-4 w-4 bg-[#CC0000] border-2 border-[#111111] sharp-corners" aria-hidden="true" />
         </div>
 
-        <h3 className="mb-2 text-lg font-heading font-semibold text-white">
-          Your content will appear here
+        <h3 className="mb-2 text-2xl font-heading font-black text-[#111111] uppercase tracking-tighter">
+          Awaiting Content
         </h3>
-        <p className="max-w-sm text-sm leading-relaxed text-[#94A3B8]">
-          Fill in the form on the left and hit{' '}
-          <span className="font-semibold text-[#F7931A]">Generate</span> to create
-          platform-optimized content ideas powered by AI.
+        <p className="max-w-sm text-sm leading-relaxed font-serif text-[#525252] italic">
+          Fill in the configuration on the left and strike the{' '}
+          <span className="font-bold text-[#111111] not-italic uppercase tracking-widest text-xs">Print Content Blueprint</span>{' '}
+          button to begin the press.
         </p>
 
         {/* Decorative dots */}
-        <div className="mt-8 flex gap-1.5" aria-hidden="true">
+        <div className="mt-8 flex gap-2" aria-hidden="true">
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="h-1.5 w-1.5 rounded-full bg-[#F7931A]/30"
+              className="h-2 w-2 bg-[#111111] sharp-corners"
               style={{ animationDelay: `${i * 200}ms` }}
             />
           ))}
@@ -190,7 +195,7 @@ export default function OutputWorkspace({
   return (
     <section aria-label="Output workspace" className="space-y-6">
       {/* ── Tab Bar ──────────────────────────────────────────── */}
-      <div className="relative rounded-xl border border-white/10 bg-[#0F1115] overflow-hidden">
+      <div className="relative border-b-4 border-[#111111] bg-[#F9F9F7] sharp-corners">
         <div
           ref={tablistRef}
           role="tablist"
@@ -212,10 +217,10 @@ export default function OutputWorkspace({
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveTab(tab.platform)}
                 onKeyDown={handleTabKeyDown}
-                className={`relative z-10 flex items-center gap-2 px-5 py-4 text-sm font-mono font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#F7931A]/60 ${
+                className={`relative z-10 flex items-center gap-2 px-5 py-4 text-sm font-mono font-bold uppercase tracking-widest transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#111111] ${
                   isActive
-                    ? 'text-[#F7931A]'
-                    : 'text-[#94A3B8] hover:text-white'
+                    ? 'text-[#111111] bg-[#E5E5E0]'
+                    : 'text-[#737373] hover:text-[#111111] hover:bg-black/5'
                 }`}
               >
                 <span aria-hidden="true">{tab.icon}</span>
@@ -226,7 +231,7 @@ export default function OutputWorkspace({
 
           {/* Animated underline */}
           <span
-            className="absolute bottom-0 h-0.5 rounded-full bg-gradient-to-r from-[#EA580C] to-[#F7931A] shadow-[0_0_8px_2px_rgba(247,147,26,0.5)] transition-all duration-300 ease-out"
+            className="absolute bottom-0 h-1 bg-[#111111] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{ left: underline.left, width: underline.width }}
             aria-hidden="true"
           />
