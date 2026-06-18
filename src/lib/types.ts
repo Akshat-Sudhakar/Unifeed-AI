@@ -30,11 +30,35 @@ export type Language = 'english' | 'hindi' | 'hinglish';
 /** Request payload sent to /api/generate */
 export interface GenerateRequest {
   segment: Segment;
-  topic: string;
+  topic?: string;
   usps: USP[];
   platforms: Platform[];
   tone: Tone;
   language: Language;
+}
+
+/** A single content idea card with an engineered prompt */
+export interface IdeaCard {
+  id: string; // Used by frontend for tracking list keys and saved items
+  novelty_note: string;
+  idea: {
+    title: string;
+    persona: string;
+    funnel_stage: "Awareness" | "Consideration" | "Decision" | "Retention";
+    pillar: string;
+    format: string;
+    core_angle: string;
+    why_it_works: string;
+    talking_points: string[];
+    risk: string;
+  };
+  engineered_prompt: string;
+}
+
+/** Response from /api/generate-ideas */
+export interface IdeaGeneratorResponse {
+  ideas: IdeaCard[];
+  generatedAt: string;
 }
 
 /** A single hook variation */

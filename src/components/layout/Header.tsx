@@ -53,16 +53,6 @@ export default function Header({ historyCount = 0, onHistoryToggle }: HeaderProp
             Generator
           </Link>
 
-          <Link
-            href="/swipe-file"
-            className={`btn-editorial-outline px-3 py-1.5 text-xs ${
-              pathname === '/swipe-file' ? 'bg-[#111111] text-[#F9F9F7] shadow-[4px_4px_0px_0px_#CC0000] border-[#CC0000]' : ''
-            }`}
-            aria-current={pathname === '/swipe-file' ? 'page' : undefined}
-          >
-            Saved Ideas
-          </Link>
-
           {onHistoryToggle && (
             <button
               type="button"
