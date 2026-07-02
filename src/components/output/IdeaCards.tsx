@@ -62,7 +62,7 @@ function IdeaCardItem({ idea, index, isSaved, onToggleSave }: { idea: IdeaCard; 
             <p className="font-serif text-sm text-[#333333] leading-relaxed italic">{idea.novelty_note}</p>
           </div>
         )}
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#525252] mb-1">Persona</p>
@@ -120,11 +120,10 @@ function IdeaCardItem({ idea, index, isSaved, onToggleSave }: { idea: IdeaCard; 
               type="button"
               onClick={() => onToggleSave(idea)}
               aria-label={isSaved ? 'Remove from saved' : `Save idea ${index + 1}`}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-200 sharp-corners border ${
-                isSaved
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-200 sharp-corners border ${isSaved
                   ? 'bg-[#111111] border-[#111111] text-white'
                   : 'bg-white border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white'
-              }`}
+                }`}
             >
               <BookmarkIcon size={12} filled={isSaved} />
               <span>{isSaved ? 'Saved' : 'Save'}</span>
@@ -134,11 +133,10 @@ function IdeaCardItem({ idea, index, isSaved, onToggleSave }: { idea: IdeaCard; 
               type="button"
               onClick={handleCopy}
               aria-label={copied ? 'Copied!' : `Copy prompt for idea ${index + 1}`}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-200 sharp-corners border ${
-                copied
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-200 sharp-corners border ${copied
                   ? 'bg-[#111111] border-[#111111] text-white'
                   : 'bg-white border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white'
-              }`}
+                }`}
             >
               {copied
                 ? <><CheckIcon size={12} /><span>Copied!</span></>
@@ -205,11 +203,10 @@ export default function IdeaCards({ ideas, isStreaming = false, isSaved, onSaveI
             type="button"
             onClick={handleCopyAll}
             aria-label={allCopied ? 'All prompts copied' : 'Copy all engineered prompts'}
-            className={`flex items-center gap-2 px-4 py-2 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-200 sharp-corners border-2 ${
-              allCopied
+            className={`flex items-center gap-2 px-4 py-2 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-200 sharp-corners border-2 ${allCopied
                 ? 'bg-[#111111] border-[#111111] text-white'
                 : 'bg-white border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white'
-            }`}
+              }`}
           >
             {allCopied
               ? <><CheckIcon size={12} /><span>Copied All!</span></>
@@ -222,11 +219,11 @@ export default function IdeaCards({ ideas, isStreaming = false, isSaved, onSaveI
       {/* Cards */}
       <div className="flex flex-col gap-4">
         {ideas.map((idea, index) => (
-          <IdeaCardItem 
-            key={idea.id} 
-            idea={idea} 
-            index={index} 
-            isSaved={isSaved(idea.id)} 
+          <IdeaCardItem
+            key={idea.id}
+            idea={idea}
+            index={index}
+            isSaved={isSaved(idea.id)}
             onToggleSave={(i) => isSaved(i.id) ? onRemoveIdea(i.id) : onSaveIdea(i)}
           />
         ))}

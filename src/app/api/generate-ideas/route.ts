@@ -85,8 +85,8 @@ function extractNewIdeas(
             if (obj.idea && obj.engineered_prompt) {
               ideas.push({
                 id: `${Math.random().toString(36).substring(2, 9)}`,
-                novelty_note:     String(obj.novelty_note || '').trim(),
-                idea:             obj.idea,
+                novelty_note: String(obj.novelty_note || '').trim(),
+                idea: obj.idea,
                 engineered_prompt: String(obj.engineered_prompt).trim(),
               });
               pos = i + 1;
@@ -203,9 +203,9 @@ export async function POST(request: NextRequest) {
                     enc.encode(
                       JSON.stringify({
                         idea: {
-                          id:               `${idea.id ?? sent + 1}-${Math.random().toString(36).substring(2, 9)}`,
-                          novelty_note:     String(idea.novelty_note || '').trim(),
-                          idea:             idea.idea,
+                          id: `${idea.id ?? sent + 1}-${Math.random().toString(36).substring(2, 9)}`,
+                          novelty_note: String(idea.novelty_note || '').trim(),
+                          idea: idea.idea,
                           engineered_prompt: String(idea.engineered_prompt).trim(),
                         },
                       }) + '\n'

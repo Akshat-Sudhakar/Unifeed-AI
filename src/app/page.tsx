@@ -9,10 +9,10 @@ import { useSavedIdeas } from '@/hooks/useSavedIdeas';
 import type { GenerateRequest, IdeaCard } from '@/lib/types';
 
 export default function DashboardPage() {
-  const [ideas, setIdeas]           = useState<IdeaCard[]>([]);
-  const [isLoading, setIsLoading]   = useState(false);   // spinner before first card
+  const [ideas, setIdeas] = useState<IdeaCard[]>([]);
+  const [isLoading, setIsLoading] = useState(false);   // spinner before first card
   const [isStreaming, setIsStreaming] = useState(false);  // cards arriving live
-  const [error, setError]           = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const { savedIdeas, saveIdea, removeIdea, isSaved, clearAll, exportAll } = useSavedIdeas();
@@ -25,9 +25,9 @@ export default function DashboardPage() {
 
     try {
       const res = await fetch('/api/generate-ideas', {
-        method:  'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(request),
+        body: JSON.stringify(request),
       });
 
       if (!res.ok) {
@@ -40,9 +40,9 @@ export default function DashboardPage() {
       setIsLoading(false);
       setIsStreaming(true);
 
-      const reader  = res.body!.getReader();
+      const reader = res.body!.getReader();
       const decoder = new TextDecoder();
-      let leftover  = '';
+      let leftover = '';
 
       while (true) {
         const { done, value } = await reader.read();
@@ -57,7 +57,7 @@ export default function DashboardPage() {
           if (!trimmed) continue;
           try {
             const data = JSON.parse(trimmed);
-            if (data.idea)  setIdeas((prev) => [...prev, data.idea as IdeaCard]);
+            if (data.idea) setIdeas((prev) => [...prev, data.idea as IdeaCard]);
             if (data.error) setError(data.error as string);
           } catch { /* partial line — wait */ }
         }
@@ -89,20 +89,20 @@ export default function DashboardPage() {
         <aside
           className="transition-all duration-700 ease-in-out"
           style={{
-            flex:     hasContent ? '0 0 45%' : '0 0 100%',
-            maxWidth: hasContent ? '45%'      : '800px',
+            flex: hasContent ? '0 0 45%' : '0 0 100%',
+            maxWidth: hasContent ? '45%' : '800px',
             minWidth: '340px',
           }}
         >
           <div
             className="border-2 border-[#111111] bg-[#F9F9F7] sharp-corners"
             style={{
-              position:      'sticky',
-              top:           '96px',
-              height:        'calc(100vh - 96px - 48px)',
-              display:       'flex',
+              position: 'sticky',
+              top: '96px',
+              height: 'calc(100vh - 96px - 48px)',
+              display: 'flex',
               flexDirection: 'column',
-              overflow:      'hidden',
+              overflow: 'hidden',
             }}
           >
             <InputPanel onGenerate={handleGenerate} isLoading={isLoading || isStreaming} />
@@ -112,9 +112,8 @@ export default function DashboardPage() {
         {/* ── RIGHT: Output ─────────────────────────────────── */}
         <main
           id="main-content"
-          className={`transition-all duration-700 ease-in-out overflow-hidden ${
-            hasContent ? 'opacity-100 flex-1' : 'opacity-0 w-0 hidden'
-          }`}
+          className={`transition-all duration-700 ease-in-out overflow-hidden ${hasContent ? 'opacity-100 flex-1' : 'opacity-0 w-0 hidden'
+            }`}
           style={{ minWidth: 0 }}
         >
           {/* Error */}
@@ -166,9 +165,9 @@ export default function DashboardPage() {
 
           {/* Cards render progressively as they stream in */}
           {(isStreaming || ideas.length > 0) && (
-            <IdeaCards 
-              ideas={ideas} 
-              isStreaming={isStreaming} 
+            <IdeaCards
+              ideas={ideas}
+              isStreaming={isStreaming}
               isSaved={isSaved}
               onSaveIdea={saveIdea}
               onRemoveIdea={removeIdea}
@@ -177,11 +176,11 @@ export default function DashboardPage() {
         </main>
       </div>
 
-      <SavedIdeasDrawer 
-        isOpen={isDrawerOpen} 
-        onClose={() => setIsDrawerOpen(false)} 
-        savedIdeas={savedIdeas} 
-        onRemove={removeIdea} 
+      <SavedIdeasDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        savedIdeas={savedIdeas}
+        onRemove={removeIdea}
         onClearAll={clearAll}
         onExportAll={exportAll}
       />
